@@ -1,0 +1,97 @@
+<div class="bg-white h-full p-4">
+  <form class="flex flex-col" [formGroup]="userForm">
+    <div class="w-full flex flex-col">
+      <mat-form-field appearance="standard">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Jon Doe" formControlName="name">
+      </mat-form-field>
+      <div
+        *ngIf="
+          userForm.controls['name'].invalid &&
+          (userForm.controls['name'].dirty || userForm.controls['name'].touched)
+        "
+        class="text-red-600"
+      >
+        Name is required
+      </div>
+    </div>
+    <div class="w-full flex flex-col my-2">
+      <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="jondoe@gmail.com" formControlName="email">
+      </mat-form-field>
+      <div
+        *ngIf="
+          userForm.controls['email'].invalid &&
+          (userForm.controls['email'].dirty || userForm.controls['email'].touched)
+        "
+        class="text-red-600"
+      >
+        Enter valid email
+      </div>
+    </div>
+    <div class="flex w-full">
+      <div class="w-1/2 flex flex-col my-2 mr-1">
+        <mat-form-field appearance="standard">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="9957099570" formControlName="phone">
+        </mat-form-field>
+        <div
+        *ngIf="
+          userForm.controls['phone'].invalid &&
+          (userForm.controls['phone'].dirty || userForm.controls['phone'].touched)
+        "
+        class="text-red-600"
+      >
+        Should be a 10 digit number
+      </div>
+      </div>
+      <div class="w-1/2 flex flex-col my-2 ml-1">
+        <div class="flex w-full">
+          <mat-form-field appearance="standard">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="dp3" formControlName="dob" [disabled]="true">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <!-- <input
+            class="border-b border-gray-600 p-2 w-full focus:outline-none focus:outline-none focus:outline-none"
+            formControlName="dob"
+            [matDatepicker]="picker"
+            placeholder="dd/mm/yyyy"
+          />
+          <mat-datepicker-toggle
+            class="flex items-center justify-center"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker> -->
+        </div>
+        <div
+        *ngIf="
+          userForm.controls['dob'].invalid &&
+          (userForm.controls['dob'].dirty || userForm.controls['dob'].touched)
+        "
+        class="text-red-600"
+      >
+        DOB is required
+      </div>
+      </div>
+    </div>
+  </form>
+  <div class="flex items-center justify-end">
+    <button
+      class="px-4 py-2 mr-2 text-white bg-gray-400 rounded-md"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      class="px-4 py-2 text-white bg-blue-600 rounded-md"
+      (click)="onAdd()"
+      [disabled]="userForm.invalid"
+    >
+      Save
+    </button>
+  </div>
+</div>
